@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="app-header">
+    <div class="container">
+      <h1>Expense Tracker</h1>
+      <p class="tagline">Track where your money goes.</p>
+    </div>
+  </header>
+
+  <main class="container" id="main-content" tabindex="-1">
+
+    <section class="card" id="form-card" aria-labelledby="form-heading">
+      <h2 id="form-heading" aria-live="polite">Add an expense</h2>
+      <form id="expense-form" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" placeholder="e.g. Groceries" aria-describedby="description-error" required>
+            <p class="error-message" id="description-error" role="alert"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" name="amount" step="0.01" placeholder="0.00" aria-describedby="amount-error" required>
+            <p class="error-message" id="amount-error" role="alert"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Bills">Bills</option>
+              <option value="Health">Health</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn" id="submit-btn">Add expense</button>
+          <button type="button" class="btn btn-secondary" id="cancel-edit" hidden>Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="list-heading">
+      <h2 id="list-heading">Expenses</h2>
+
+      <div class="filter-bar">
+        <div class="form-field">
+          <label for="search-input">Search</label>
+          <input type="search" id="search-input" placeholder="Search descriptions...">
+        </div>
+
+        <div class="form-field">
+          <label for="category-filter">Category</label>
+          <select id="category-filter">
+            <option value="all">All categories</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bills">Bills</option>
+            <option value="Health">Health</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="sort-select">Sort by</label>
+          <select id="sort-select">
+            <option value="newest" selected>Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="amount-high">Highest Amount First</option>
+            <option value="amount-low">Lowest Amount First</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="button" id="clear-filters" class="btn btn-danger">Clear filters</button>
+
+      <ul id="expense-list" class="expense-list">
+        <li class="empty-state">
+          <p class="empty-title">No expenses yet</p>
+          <p class="empty-hint">Add your first expense using the form above.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Summary</h2>
+
+      <dl class="summary-grid">
+        <div class="summary-item">
+          <dt class="summary-label">Total spent</dt>
+          <dd id="total" class="summary-value">€0.00</dd>
+        </div>
+
+        <div class="summary-item">
+          <dt class="summary-label">Expenses</dt>
+          <dd id="expense-count" class="summary-value">0</dd>
+        </div>
+
+        <div class="summary-item">
+          <dt class="summary-label">Average</dt>
+          <dd id="average" class="summary-value">€0.00</dd>
+        </div>
+      </dl>
+      
+      <h3 class="summary-subheading">By category</h3>
+      <ul id="category-totals" class="category-totals"></ul>
+      
+      <button type="button" id="reset-data" class="btn btn-danger">Reset all data</button>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>Built with vanilla HTML, CSS and JavaScript.</p>
+  </footer>
+
+</body>
+</html>

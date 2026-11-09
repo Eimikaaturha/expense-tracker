@@ -1,0 +1,534 @@
+:root {
+  /* Dark green theme */
+  --color-bg: #f3f7f4;
+  --color-surface: #ffffff;
+  --color-text: #17251d;
+  --color-muted: #5a6b61;
+  --color-accent: #166534;
+  --color-accent-dark: #14532d;
+  --color-accent-soft: #ecfdf3;
+  --color-danger: #b91c1c;
+  --color-danger-dark: #991b1b;
+  --color-border: #d3e2d8;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(20, 60, 40, 0.06), 0 6px 16px rgba(20, 60, 40, 0.06);
+  --transition: 150ms ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Author styles must not accidentally override the hidden attribute. */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+/* Keyboard-only shortcut to the main content. Hidden until focused. */
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.55rem 0.9rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  transition: top var(--transition);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* The main region is a focus target for the skip link, not a control. */
+#main-content:focus {
+  outline: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.app-header {
+  background-color: var(--color-accent-dark);
+  color: #ffffff;
+  padding: 2.25rem 0;
+  margin-bottom: 1.5rem;
+}
+
+.app-header h1 {
+  margin-bottom: 0.15rem;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  margin-bottom: 0;
+  opacity: 0.85;
+}
+
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+  overflow-wrap: anywhere;
+}
+
+/* Clear visual signal that the form is in edit mode. */
+.card.is-editing {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.16), var(--shadow);
+}
+
+.card.is-editing #form-heading {
+  color: var(--color-accent);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.form-field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.7rem;
+  font: inherit;
+  color: inherit;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-field input::placeholder {
+  color: #6b7c72;
+}
+
+.form-field input:focus-visible,
+.form-field select:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.form-field input[aria-invalid="true"],
+.form-field select[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+.form-field input[aria-invalid="true"]:focus-visible,
+.form-field select[aria-invalid="true"]:focus-visible {
+  border-color: var(--color-danger);
+  outline-color: var(--color-danger);
+}
+
+.error-message {
+  margin: 0;
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Hide the message wrapper while it has no text. */
+.error-message:empty {
+  display: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.6rem 1.15rem;
+  font: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--color-accent);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition),
+    border-color var(--transition);
+}
+
+.btn:hover {
+  background-color: var(--color-accent-dark);
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn-secondary {
+  color: var(--color-accent);
+  background-color: transparent;
+  border-color: var(--color-accent);
+}
+
+.btn-secondary:hover {
+  color: #ffffff;
+  background-color: var(--color-accent);
+}
+
+.btn-danger {
+  color: var(--color-danger);
+  background-color: transparent;
+  border-color: var(--color-danger);
+}
+
+.btn-danger:hover {
+  color: #ffffff;
+  background-color: var(--color-danger-dark);
+}
+
+/* Keep the destructive buttons separated from surrounding content. */
+#clear-filters {
+  margin-bottom: 1.25rem;
+}
+
+#reset-data {
+  margin-top: 1.25rem;
+}
+
+.filter-bar {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.expense-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.expense-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas:
+    "description amount actions"
+    "meta amount actions";
+  gap: 0.15rem 1rem;
+  padding: 0.8rem 0.5rem;
+  margin: 0 -0.5rem;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition);
+}
+
+.expense-item:first-child {
+  padding-top: 0.5rem;
+}
+
+.expense-item:last-child {
+  padding-bottom: 0.5rem;
+  border-bottom: none;
+}
+
+@media (hover: hover) {
+  .expense-item:hover {
+    background-color: var(--color-accent-soft);
+  }
+}
+
+.expense-description {
+  grid-area: description;
+  min-width: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.expense-meta {
+  grid-area: meta;
+  min-width: 0;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+.expense-amount {
+  grid-area: amount;
+  align-self: center;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.expense-actions {
+  grid-area: actions;
+  display: flex;
+  align-self: center;
+  gap: 0.4rem;
+}
+
+.edit-btn,
+.delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+  padding: 0.35rem 0.7rem;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background-color: transparent;
+  border: 1px solid;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color var(--transition), background-color var(--transition),
+    border-color var(--transition);
+}
+
+.edit-btn {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.edit-btn:hover {
+  color: #ffffff;
+  background-color: var(--color-accent);
+}
+
+.edit-btn:focus-visible {
+  outline-color: var(--color-accent);
+}
+
+.delete-btn {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.delete-btn:hover {
+  color: #ffffff;
+  background-color: var(--color-danger-dark);
+}
+
+.delete-btn:focus-visible {
+  outline-color: var(--color-danger);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.summary-label {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.summary-value {
+  margin: 0;
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.summary-subheading {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.category-totals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.category-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.category-total:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.category-name {
+  color: var(--color-muted);
+}
+
+.category-amount {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+/* Shared empty state: a title plus a short hint. */
+.empty-state {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  background-color: var(--color-bg);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.empty-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.empty-hint {
+  margin: 0.25rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.app-footer {
+  padding: 1.5rem 0 2rem;
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn-danger:focus-visible {
+  outline-color: var(--color-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+/* Tablet: two filter columns, with Search spanning the full row. */
+@media (max-width: 720px) {
+  .filter-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filter-bar .form-field:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Phone: everything stacks into one column. */
+@media (max-width: 600px) {
+  .app-header {
+    padding: 1.75rem 0;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .form-grid,
+  .filter-bar,
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar .form-field:first-child {
+    grid-column: auto;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .expense-item {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "description description"
+      "meta amount"
+      "actions actions";
+  }
+
+  .expense-actions {
+    justify-content: flex-end;
+    margin-top: 0.25rem;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    min-height: 2.25rem;
+  }
+}
